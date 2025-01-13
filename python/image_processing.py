@@ -1,43 +1,58 @@
 import image_processing_python as ipp
 import numpy as np
-#import sys
-#sys.path.append('path_to_your_build_directory')  # Add the build directory to the Python path
 
-# Create a dummy RGB image (e.g., 2x2 image)
-image_data = np.array([[[255, 0, 0], [0, 255, 0]],
-                       [[0, 0, 255], [255, 255, 0]]], dtype=np.uint8)
+# Generate random uint8 RGB values for a 1024x1024 image: 3 values per pixel (R, G, B)
+pixels_data = np.random.randint(0, 256, size=(1024 * 1024 * 3), dtype=np.uint8)
+# Create a list of RGB pixel objects from the numpy array
+large_pixels_rgb = [
+    ipp.RGB(pixels_data[i], pixels_data[i+1], pixels_data[i+2])
+    for i in range(0, len(pixels_data), 3)
+]
 
-# Call the grayscale conversion function
-grayscale_image = image_processing_python.grayscaleConversion(image_data)
+# Generate a 10x10 grid of RGB pixels with random uint8 values
+rand_pixels_gray = [ipp.Gray(random.randint(0, 255)) for _ in range(10 * 10)]
+# Generate a 10x10 grid of Gray pixels with random uint8 values
+rand_pixels_rgb = [ipp.RGB(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) for _ in range(10 * 10)]
 
-print(grayscale_image)
+pixels_gray = [
+    ipp.Gray(10), ipp.Gray(20), ipp.Gray(30),
+    ipp.Gray(40), ipp.Gray(50), ipp.Gray(60),
+    ipp.Gray(70), ipp.Gray(80), ipp.Gray(90)
+]
 
-# ----------------------------------
+# Create an RGB image (3x3 for example) with some sample colors
+pixels_rgb = [
+    ipp.RGB(255, 0, 0), ipp.RGB(0, 255, 0), ipp.RGB(0, 0, 255),
+    ipp.RGB(255, 255, 0), ipp.RGB(0, 255, 255), ipp.RGB(255, 0, 255),
+    ipp.RGB(192, 192, 192), ipp.RGB(128, 128, 128), ipp.RGB(64, 64, 64)
+]
 
-# Generate random pixel data (256x256 image, RGB format)
-# Random RGB values in range [0, 255] -- Ensure values are uint8 -- Ensure its 1-dim
-pixels_data = np.random.randint(0, 256, size=(256, 256, 3), dtype=np.uint8).flatten()
+# Create ImageRGB instance (3x3 image with RGB pixels)
+image_rgb = ipp.ImageRGB(3, 3, True, pixels_rgb)
+print("Original RGB Image:")
+image_rgb.print()
 
-# Create an image object (10x10, RGB)
-img = ipp.Image(10, 10, True, pixels_data)
+# Convert the image to grayscale
+image_gray = ipp.grayscaleConversion(image_rgb)
+print("\nConverted Grayscale Image:")
+image_gray.print()
 
-# Call the methods
-res_img = ipp.grayscaleConversion(img)
-# Get the raw pixel data after conversion
-result_data = res_img.getData()
-# Print the results
-print(result_data)
+# Apply Blur on the RGB image
+image_blur_rgb = ipp.applyBlur(image_rgb)
+print("\RGB Blurred Image:")
+image_blur_rgb.print()
 
-ipp.applyBlur(img, 3)
-ipp.applyEdgeDetection(img)
-ipp.applyHistogramEqualization(img)
+# Apply Blur on the grayscale image
+image_blur_gray = ipp.applyBlur(image_gray)
+print("\grayscale Blurred Image:")
+image_blur_gray.print()
 
-# ----------------------------------
+# Apply edge detection on grayscale image
+image_edge_detect = ipp.applyEdgeDetection(image_gray)
+print("\Edge Detected Image:")
+image_edge_detect.print()
 
-# Create a grayscale image
-image = ipp.ImageGray(10, 10, False, None)
-
-# Set and get pixel values
-image.setPixel(0, 0, 100)
-pixel = image.getPixel(0, 0)
-print(pixel)
+# Apply histogram equalization on grayscale image
+image_hist = ipp.histogramEqualization(image_gray)
+print("\Edge Equalized Image:")
+image_hist.print()
