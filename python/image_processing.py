@@ -1,6 +1,7 @@
 import image_processing_python as ipp
 import numpy as np
 
+'''
 # Generate random uint8 RGB values for a 1024x1024 image: 3 values per pixel (R, G, B)
 pixels_data = np.random.randint(0, 256, size=(1024 * 1024 * 3), dtype=np.uint8)
 # Create a list of RGB pixel objects from the numpy array
@@ -19,6 +20,7 @@ pixels_gray = [
     ipp.Gray(40), ipp.Gray(50), ipp.Gray(60),
     ipp.Gray(70), ipp.Gray(80), ipp.Gray(90)
 ]
+'''
 
 # Create an RGB image (3x3 for example) with some sample colors
 pixels_rgb = [

@@ -39,13 +39,25 @@ cmake ..
 make
 ```
 
-### Tunning Tests (Unit Tests)
+### Running Tests (Unit Tests)
 This project uses GoogleTest to ensure the correctness of the image processing functions.
 
 ```bash
 mkdir build
 cd build
 cmake ..
-make ImageProcessingTests
 ctest
+```
+
+### Running Pythong Binding Tests
+This project uses nanobind to bind the C++ code to Python.
+
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+cd ../python/
+export PYTHONPATH=../build/python:$PYTHONPATH
+python3 python/image_processing.py
 ```

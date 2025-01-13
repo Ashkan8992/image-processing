@@ -1,0 +1,5 @@
+# Set CUDA (for GPU-accelerated operations)
+# find_package(CUDA REQUIRED)
+# set(CUDA_ARCH_BIN "75")
+# cuda_add_library(cuda_processing STATIC src/cuda_processing.cu)
+# target_link_libraries(ImageProcessingLib PRIVATE CUDA::cudart)

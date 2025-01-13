@@ -59,6 +59,20 @@ Image<PixelType>::Image(unsigned int width, unsigned int height, bool isRgb, std
     }
 }
 
+template <typename PixelType>
+Image<PixelType>::Image(unsigned int width, unsigned int height, bool isRgb, const std::vector<PixelType>& data) : width_(width), height_(height), isRgb_(isRgb), channels_(isRgb ? 3 : 1) {
+    // Allocate memory for pixel data (1D array)
+    pixels_ = std::make_unique<PixelType[]>(width * height);
+        
+    if (data) {
+        /* if (sizeof(PixelType) * width_ * height_ != sizeof(data)) { // Wrong: data is ptr and sizeof(data) is 8
+            throw std::invalid_argument("Input data size does not match required image size.");
+        } */
+        // Allocate memory for pixel data (1D array)
+        pixels_ = std::move(data);  // Move the data into pixels_ (no need for std::memcpy)
+    }
+}
+
 // Get image width
 template <typename PixelType>
 unsigned int Image<PixelType>::getWidth() const {
@@ -108,28 +122,7 @@ std::shared_ptr<PixelType[]> Image<PixelType>::getData() const {
     return std::shared_ptr<PixelType[]>(pixels_.get(), [](PixelType* ptr) {});
 }
 
-/* template <>
-void Image<RGB>::print() {
-    for (int x = 0; x < width_; ++x) {
-        for (int y = 0; y < height_; ++y) {
-            RGB pixel = this->getPixel(x, y);
-            std::cout << "(" << (int)pixel.r << ", " << (int)pixel.g << ", " << (int)pixel.b << ") ";
-        }
-        std::cout << "\n";
-    }
-}
-
-template <>
-void Image<uint8_t>::print() {
-    for (int x = 0; x < width_; ++x) {
-        for (int y = 0; y < height_; ++y) {
-            uint8_t pixel = this->getPixel(x, y);
-            std::cout << (int)pixel << " ";
-        }
-        std::cout << "\n";
-    }
-} */
-
+// Print the image
 template <typename PixelType>
 void Image<PixelType>::print() {
     for (int x = 0; x < width_; ++x) {

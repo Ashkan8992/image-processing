@@ -10,7 +10,7 @@ Image<Gray> grayscaleConversion(const Image<RGB>& img) {
     } */
     
     // Create a result image with the same dimensions and type as input image
-    Image<Gray> gray_img(img.getWidth(), img.getHeight(), false);
+    Image<Gray> gray_img(img.getWidth(), img.getHeight(), false, nullptr);
     
     // Iterate through the pixels and convert RGB to grayscale
     // #pragma omp parallel for collapse(2) // For parallel computing
@@ -32,7 +32,7 @@ Image<RGB> applyBlur(const Image<RGB>& img, int kernelSize) {
     int kernelRadius = kernelSize / 2;
     
     // Create a result image with the same dimensions and type as input image
-    Image<RGB> blur_img(img.getWidth(), img.getHeight(), img.isRgbImage());
+    Image<RGB> blur_img(img.getWidth(), img.getHeight(), img.isRgbImage(), nullptr);
     
     // Iterate through each pixel
     for (unsigned int y = 0; y < img.getHeight(); ++y) {
@@ -80,7 +80,7 @@ Image<Gray> applyBlur(const Image<Gray>& img, int kernelSize) {
     int kernelRadius = kernelSize / 2;
     
     // Create a result image with the same dimensions and type as input image
-    Image<Gray> blur_img(img.getWidth(), img.getHeight(), img.isRgbImage());
+    Image<Gray> blur_img(img.getWidth(), img.getHeight(), img.isRgbImage(), nullptr);
     
     // Iterate through each pixel
     for (unsigned int y = 0; y < img.getHeight(); ++y) {
@@ -123,7 +123,7 @@ Image<Gray> applyEdgeDetection(const Image<Gray>& img) {
     int width_ = img.getWidth(); int height_ = img.getHeight();
     
     // Create a result image with the same dimensions and type as input image
-    Image<Gray> res_img(img.getWidth(), img.getHeight(), false);
+    Image<Gray> res_img(img.getWidth(), img.getHeight(), false, nullptr);
     
     // Sobel kernels for detecting edges in x and y directions
     int Gx[3][3] = {
@@ -176,7 +176,7 @@ Image<Gray> applyHistogramEqualization(const Image<Gray>& img) {
     } */
     
     // Create a result image with the same dimensions and type as input image
-    Image<Gray> res_img(img.getWidth(), img.getHeight(), false);
+    Image<Gray> res_img(img.getWidth(), img.getHeight(), false, nullptr);
     
     // Compute histogram (frequency of pixel intensities)
     std::vector<int> hist(256, 0); // 256 bins for pixel values (0-255)

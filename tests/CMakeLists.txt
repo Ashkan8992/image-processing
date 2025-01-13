@@ -3,7 +3,10 @@ find_package(GTest REQUIRED)
 
 # Add the test source files
 set(TEST_SOURCES
-		test_image_processing.cpp
+		test_grayscale.cpp
+		test_blur.cpp
+		test_edge_detection.cpp
+		test_histogram.cpp
 )
 
 # Create the test executables

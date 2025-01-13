@@ -23,16 +23,8 @@ target_include_directories(ImageProcessingLib PUBLIC ${CMAKE_SOURCE_DIR}/src)
 # Enable Unit Testing for CTest
 enable_testing()
 
-# Add subdirectories for source code, tests, Python bindings, and CUDA
-# add_subdirectory(src)      # Core Library
-add_subdirectory(tests)    # Google tests
-# add_subdirectory(python)   # Python bindings
-# add_subdirectory(cuda)     # CUDA parallel computing
-
-# ----------------------------
-
-# Set CUDA (for GPU-accelerated operations)
-# find_package(CUDA REQUIRED)
-# set(CUDA_ARCH_BIN "75")
-# cuda_add_library(cuda_processing STATIC src/cuda_processing.cu)
-# target_link_libraries(ImageProcessingLib PRIVATE CUDA::cudart)
+# ---------- Add Subdirectories ----------
+# add_subdirectory(src)  # Core Library
+add_subdirectory(tests)  # Google tests
+add_subdirectory(python) # Python bindings
+# add_subdirectory(cuda) # CUDA

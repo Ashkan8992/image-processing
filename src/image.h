@@ -68,7 +68,8 @@ template<typename PixelType>
 class Image {
 public:
     // Constructor to create an image
-    Image(unsigned int width, unsigned int height, bool isRGB = true, std::unique_ptr<PixelType[]> data = nullptr); // implicit conversion
+    explicit Image(unsigned int width, unsigned int height, bool isRGB = true, std::unique_ptr<PixelType[]> data = nullptr); // implicit conversion
+    explicit Image(unsigned int width, unsigned int height, bool isRGB = true, const std::vector<PixelType>& data = {});
     
     // Deconstructor (no need since using smart ptr)
     // ~Image() = default;
