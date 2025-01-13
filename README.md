@@ -31,7 +31,7 @@ Examples of how to use the library from both C++ and Python.
 ### Clone the repository
 
 ```bash
-git clone https://github.com/ashkan8992/image-processing.git
+git clone https://github.com/Ashkan8992/image-processing.git
 cd image-processing-library
 mkdir build
 cd build
