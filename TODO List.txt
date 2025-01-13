@@ -1,0 +1,36 @@
+Ensure using C++17 or C++20 standards:
+	Specify in your compiler settings, through a flag like -std=c++17 or -std=c++20
+	Set the CXX_STANDARD variable to "17" or "20"
+	
+	cmake_minimum_required(VERSION 3.18)
+
+	project(ImageProcessingLib LANGUAGES CXX)
+
+	set(CMAKE_CXX_STANDARD 20)  # Set C++ standard to C++17
+
+	add_executable(my_program main.cpp) # ???
+
+Modular project structure
+	Core library (src),
+	Unit tests (tests),
+	Python bindings (python)
+
+Install CMake for managing the build process (done)
+Install nanobind for Python bindings (done)
+Install CUDA (CUDA 11.x or later)
+
+C++ project:
+	Custom Image Class:
+		Implement an efficient image class that handles large images in memory using std::unique_ptr for memory management
+			Smart pointer automatically cleans up memory when it goes out of scope)
+		Ensure that the class supports common operations like resizing, accessing pixels, and converting the image data between formats
+	Implement Basic Image Processing Operations (CPU-based):
+		Grayscale Conversion: Convert a color image to grayscale.
+		Blur: Implement a simple blur (e.g., box blur or Gaussian blur).
+		Edge Detection: Implement edge detection (e.g., using Sobel operator).
+		Histogram Equalization: Enhance contrast by adjusting the image histogram.
+
+CMake build system (CMakeLists.txt):
+	Set up a CMakeLists.txt file for managing the build, including necessary links to libraries like CUDA, OpenCV (for image processing tasks), and Python for bindings
+	Enable the CUDA toolkit in the CMakeLists.txt file if GPU support is enabled
+	Configure Conan or vcpkg for managing dependencies (optional but recommended)
